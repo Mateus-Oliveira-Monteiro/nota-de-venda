@@ -1,27 +1,12 @@
 package model;
 
-public class SaleItem {
-    private Product product;
+public class SaleItem implements InterSaleItem{
+    private InterProduct product;
     private int quantity;
 
     public SaleItem() {
     }
 
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
 
     public double getSubtotal() {
         return product.getPrice() * quantity;
@@ -32,5 +17,25 @@ public class SaleItem {
         String itemStr = String.format("%s %d %.2f",
                 this.getProduct().getDescription(), this.getQuantity(), this.getSubtotal());
         return itemStr;
+    }
+
+    @Override
+    public InterProduct getProduct() {
+        return product;
+    }
+
+    @Override
+    public int getQuantity() {
+        return quantity;
+    }
+
+    @Override
+    public void setProduct(InterProduct product) {
+        this.product = product;
+    }
+
+    @Override
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

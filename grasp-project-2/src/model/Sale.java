@@ -4,21 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Sale {
-    private List<SaleItem> items = new ArrayList<>();
-    public void addSaleItem(SaleItem item) {
+    private List<InterSaleItem> items = new ArrayList<>();
+
+    public void addSaleItem(InterSaleItem item) {
         items.add(item);
     }
 
-    public double getTotal(){
-        double total = 0;
-        for (SaleItem item : items) {
-            total += item.getSubtotal();
-
-        }
-        return total;
+    public List<InterSaleItem> getItems() {
+        return items;
     }
 
-    public List<SaleItem> getItems() {
-        return new ArrayList<>(items);
+    public double getTotal() {
+        return items.stream().mapToDouble(item -> item.getProduct().getPrice() * item.getQuantity()).sum();
     }
 }
